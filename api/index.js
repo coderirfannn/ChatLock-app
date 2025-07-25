@@ -24,14 +24,12 @@ if (!fs.existsSync(filesDir)) {
 
 // Security middleware
 app.use(helmet());
+
 app.use(cors({
-  origin: [
-    'http://localhost:19006', 
-    'exp://192.168.x.x:19000',
-    'http://your-frontend-url.com'
-  ],
-  credentials: true
+  origin: '*',  // 🚨 WARNING: Accepts all origins (safe only for testing)
+  credentials: true,
 }));
+
 
 // Rate limiting
 const limiter = rateLimit({

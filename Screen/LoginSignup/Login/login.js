@@ -60,18 +60,15 @@ const handleLogin = async () => {
 
   try {
     const response = await axios.post(`${API_URL}/login`, user);
-    console.log("Server response:", response.data); // 👈 inspect this
+    console.log("Server response:", response.data); // ✅ Make sure this has token
 
-    // Try different formats
-    const token =
-      response.data.token ||
-      response.data.data?.token ||
-      null;
+    const token = response.data.token;
 
     if (token) {
       await AsyncStorage.setItem("authToken", token);
       navigation.replace("Home");
     } else {
+      console.log("No token received. Full response:", response.data);
       Alert.alert("Login Error", "No token received from server");
     }
   } catch (error) {
