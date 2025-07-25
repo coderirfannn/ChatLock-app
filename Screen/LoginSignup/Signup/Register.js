@@ -16,16 +16,13 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import logo from '../../../assets/lo.png';
+import { API_URL } from "../../api";
 
 const { width } = Dimensions.get('window');
 
 
 
-const API_URL = Platform.select({
-  android: "http://10.0.2.2:8000",
-  ios: "http://localhost:8000",
-  default: "http://your-computer-ip:8000",
-});
+
 
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const validatePassword = (password) => password.length >= 8;

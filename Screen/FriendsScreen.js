@@ -14,12 +14,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserType } from '../UseContext';
 import { Ionicons } from '@expo/vector-icons';
+import { API_URL } from './api';
 
-const API_URL = Platform.select({
-  android: 'http://10.0.2.2:8000',
-  ios: 'http://localhost:8000',
-  default: 'http://your-computer-ip:8000',
-});
 
 const FriendsScreen = () => {
   const { userId, setUserId } = useContext(UserType);

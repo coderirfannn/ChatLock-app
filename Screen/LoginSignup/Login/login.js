@@ -17,14 +17,11 @@ import logo from '../../../assets/lo.png';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from '@react-navigation/native';
+import { API_URL } from '../../api';
 
 const { width } = Dimensions.get('window');
 
-const API_URL = Platform.select({
-  android: 'http://10.0.2.2:8000', // Android Emulator
-  ios: 'http://localhost:8000',   // iOS Simulator
-  default: 'http://your-computer-ip:8000', // Physical device
-});
+
 
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 

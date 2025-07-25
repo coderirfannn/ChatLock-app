@@ -27,12 +27,9 @@ import EmojiSelector from "react-native-emoji-selector";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { launchImageLibrary } from "react-native-image-picker";
 import { UserType } from "../UseContext";
+import { API_URL } from "./api";
 
-const API_URL = Platform.select({
-  android: "http://10.0.2.2:8000",
-  ios: "http://localhost:8000",
-  default: "http://localhost:8000",
-});
+
 
 const ChatMessagesScreen = () => {
   const [showEmojiSelector, setShowEmojiSelector] = useState(false);
