@@ -51,51 +51,6 @@ useFocusEffect(
 );
 
 
-  // const handleLogin = async () => {
-  //   if (!email || !password) {
-  //     Alert.alert("Error", "Please fill in both email and password");
-  //     return;
-  //   }
-
-  //   if (!validateEmail(email)) {
-  //     Alert.alert("Error", "Invalid email format");
-  //     return;
-  //   }
-
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await axios.post(`${API_URL}/login`, {
-  //       email: email.trim(),
-  //       password,
-  //     });
-
-  //     Alert.alert("Login Successful", "Welcome back!", [
-  //       { text: "OK", onPress: () => navigation.navigate("Home") },
-  //     ]);
-
-  //     // Optionally reset fields
-  //     setEmail('');
-  //     setPassword('');
-  //   } catch (error) {
-  //     console.error("Login error:", error);
-  //     let errorMessage = "Login failed. Please try again.";
-
-  //     if (error.code === 'ECONNABORTED') {
-  //       errorMessage = "Request timeout. Check your connection.";
-  //     } else if (error.code === 'ERR_NETWORK') {
-  //       errorMessage = "Network error. Cannot connect to server.";
-  //     } else if (error.response?.status === 401) {
-  //       errorMessage = "Invalid credentials. Please try again.";
-  //     } else if (error.response?.data?.message) {
-  //       errorMessage = error.response.data.message;
-  //     }
-
-  //     Alert.alert("Login Failed", errorMessage);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
 
 const handleLogin = async () => {
   const user = {
@@ -105,22 +60,25 @@ const handleLogin = async () => {
 
   try {
     const response = await axios.post(`${API_URL}/login`, user);
-    const token = response.data.token;
+    console.log("Server response:", response.data); // 👈 inspect this
+
+    // Try different formats
+    const token =
+      response.data.token ||
+      response.data.data?.token ||
+      null;
 
     if (token) {
-      await AsyncStorage.setItem("authToken", token); // ✅ Wait for storage
-      navigation.replace("Home");                     // ✅ Then navigate
+      await AsyncStorage.setItem("authToken", token);
+      navigation.replace("Home");
     } else {
       Alert.alert("Login Error", "No token received from server");
     }
   } catch (error) {
+    console.log("Login Error:", error?.response?.data || error.message);
     Alert.alert("Login Error", "Invalid email or password");
-    console.log("Login Error", error);
   }
 };
-
-
-
 
   return (
     <KeyboardAvoidingView
