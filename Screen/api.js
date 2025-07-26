@@ -1,3 +1,2 @@
-import { Platform } from "react-native";
 
-export const API_URL = "https://chatlock-app.onrender.com"
+export const API_URL = "https://backend-7kzc.onrender.com"
